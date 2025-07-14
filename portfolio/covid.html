@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Multi-Modal Diagnosis Model Project</title>
+  <style>
+    body{
+      font-family: sans-serif;
+      margin: 0;
+      padding: 30px;
+      background: linear-gradient(145deg, #f0f8ff, #ffffff);
+      color: #ffffff;
+      line-height: 1.7;
+    }
+
+    .frame{
+      max-width: 1100px;
+      margin: auto;
+      background: #080808;
+      padding: 30px 40px;
+      border-radius: 9px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.08);
+    }
+
+     h1{
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: #abb9d9;
+    }
+
+    h2{
+      font-size: 22px;
+      margin-top: 30px;
+      color: #9fc894;
+    }
+
+    h3{
+      font-size: 18px;
+      margin-top: 20px;
+
+    }
+
+    ul, ol{
+      margin: 10px 0 20px 25px;
+    }
+
+    .section{
+      margin-bottom: 40px;
+    }
+
+    .icon{
+      font-size: 22px;
+      margin-right: 8px;
+    }
+
+    table{
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    table, th, td{
+      border: 1px solid #ccc;
+    }
+
+    th, td{
+      padding: 10px;
+      text-align: left;
+    }
+
+    th{
+      background-color: #b8b8b8;
+      color: #0369a1;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <h1>Project Title: Data Preprocessing-Multi-Modal Diagnosis Model for COVID-19 & Other Respiratory Diseases</h1>
+
+    <div class="section">
+      <h2>Project Summary</h2>
+      <p>
+        The goal of this project is to create a multi-modal diagnostic system that can detect COVID-19, pneumonia, and other respiratory illnesses by combining medical imaging data (like chest X-rays and CT scans) with clinical records (such as symptoms, lab values, and demographic details).
+        <br><br>
+        The first and most crucial step toward building a high-performing AI model is data preprocessing — this project focuses deeply on that phase, ensuring the data is clean, normalized, well-aligned, and suitable for training a robust diagnostic model.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Objective</h2>
+      <ul>
+        <li>To preprocess and prepare a high-quality dataset that integrates:</li>
+        <ul>
+          <li><strong>Clinical data</strong>: Patient symptoms, vital signs, lab reports</li>
+          <li><strong>Medical imaging</strong>: Chest X-rays and CT scans</li>
+        </ul>
+        <li>To build a machine learning model that predicts whether a person has COVID-19, pneumonia, or another lung-related disease</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Types of Input Data</h2>
+      <h3>1. Clinical Features</h3>
+      <ul>
+        <li>Patient age, gender</li>
+        <li>Symptoms (fever, cough, breathlessness)</li>
+        <li>Blood markers (CRP, WBC count, oxygen saturation)</li>
+        <li>Coexisting conditions (e.g., diabetes, hypertension)</li>
+      </ul>
+
+      <h3>2. Medical Imaging</h3>
+      <ul>
+        <li>Chest X-rays (CXR)-2D grayscale images</li>
+        <li>CT scan slices-2D/3D images of lungs</li>
+        <li>Each image is linked to the corresponding clinical record</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Preprocessing Steps</h2>
+
+      <h3>A. Clinical Data Preprocessing</h3>
+      <table>
+        <tr>
+          <th>Problem</th>
+          <th>Solution</th>
+        </tr>
+        <tr>
+          <td>Missing values</td>
+          <td>Filled using statistical imputation (mean, median) or kNN</td>
+        </tr>
+        <tr>
+          <td>Inconsistent entries</td>
+          <td>Unified using mapping (e.g., "Fever", "fever" → "fever")</td>
+        </tr>
+        <tr>
+          <td>Mixed data types</td>
+          <td>Encoded categorical data (e.g., gender: 0 for Male, 1 for Female)</td>
+        </tr>
+        <tr>
+          <td>Different scales</td>
+          <td>Normalized numerical values (like CRP, oxygen saturation)</td>
+        </tr>
+        <tr>
+          <td>Redundant features</td>
+          <td>Removed irrelevant or highly correlated columns</td>
+        </tr>
+      </table>
+
+      <h3>B. Imaging Data Preprocessing</h3>
+      <table>
+        <tr>
+          <th>Task</th>
+          <th>Technique</th>
+        </tr>
+        <tr>
+          <td>Image format</td>
+          <td>Converted DICOM to PNG or JPG</td>
+        </tr>
+        <tr>
+          <td>Resize</td>
+          <td>Standardized to fixed size (e.g., 224*224 or 256*256)</td>
+        </tr>
+        <tr>
+          <td>Normalize</td>
+          <td>Pixel intensity scaled to 0-1 or standardized</td>
+        </tr>
+        <tr>
+          <td>Data augmentation</td>
+          <td>Flip, rotate, zoom, shift (to prevent overfitting)</td>
+        </tr>
+        <tr>
+          <td>Noise removal</td>
+          <td>Denoising filters or histogram equalization</td>
+        </tr>
+        <tr>
+          <td>Optional step</td>
+          <td>Lung segmentation using pre-trained U-Net model</td>
+        </tr>
+      </table>
+
+      <h3>C. Multi-Modal Alignment</h3>
+      <ul>
+        <li>Matched imaging and clinical data by patient ID and scan date</li>
+        <li>Ensured consistent labeling across modalities (COVID, Pneumonia, Normal)</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Output Dataset Features</h2>
+      <ul>
+        <li>Balanced dataset: COVID-19, Pneumonia, Normal</li>
+        <li>Each entry includes:</li>
+        <ul>
+          <li>Preprocessed image input</li>
+          <li>Corresponding clinical features</li>
+          <li>Diagnosis label</li>
+        </ul>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Tools & Technologies</h2>
+      <ul>
+        <li><strong>Python, Pandas, NumPy</strong>-clinical data preprocessing</li>
+        <li><strong>OpenCV, PIL, Pydicom</strong>-medical image handling</li>
+        <li><strong>Scikit-learn</strong>-encoding, normalization, imputation</li>
+        <li><strong>TensorFlow / PyTorch</strong>for future classification model</li>
+        <li><strong>Matplotlib, Seaborn</strong>-visualization and analysis</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Advantages of Multi-Modal Diagnosis</h2>
+      <ul>
+        <li>Combines image and clinical data for higher accuracy</li>
+        <li>Helps distinguish between COVID and pneumonia (similar symptoms)</li>
+        <li>Works even with weak or incomplete data in one modality</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Outcome of Preprocessing</h2>
+      <ul>
+        <li>Created a structured, clean dataset for training ML/DL models</li>
+        <li>Ready for use in models like CNN + clinical MLP</li>
+        <li>Effective in detecting:</li>
+        <ul>
+          <li>COVID-19</li>
+          <li>Pneumonia (bacterial/viral)</li>
+          <li>Normal lung cases</li>
+        </ul>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Real World Applications</h2>
+      <ul>
+        <li>Hospital screening and triage tool</li>
+        <li>Useful in rural/low-resource settings</li>
+        <li>Foundation for mobile/web-based AI healthcare tools</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>What I Learned</h2>
+      <ul>
+        <li>Hands-on experience with healthcare data preprocessing</li>
+        <li>Worked with real medical imaging formats like DICOM</li>
+        <li>Addressed issues in data quality, integration, and balancing</li>
+        <li>Prepared data for a practical, real-world AI diagnostic system</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
